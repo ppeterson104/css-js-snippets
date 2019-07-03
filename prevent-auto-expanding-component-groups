@@ -1,0 +1,19 @@
+ //Prevent auto expanding of the component groups. Place this in the script tags of the custom footer HTML
+
+<script>
+  
+  $(function() {
+    
+    $('.open').each(function() {
+      
+      $(this).removeClass('open');
+      
+    });
+    
+    $('.fa-minus-square-o').each(function() {
+    
+    $(this).removeClass('fa-minus-square-o').addClass('fa-plus-square-o');
+    
+    });
+    
+    </script>
