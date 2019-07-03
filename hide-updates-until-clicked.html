@@ -1,0 +1,94 @@
+
+
+
+<!--
+
+*This CSS will need to be added to the Custom CSS portion of Statuspage for the box shadow effect to work on hover/click. The third style removes all of the borders.
+
+div.unresolved-incident:hover {
+
+box-shadow:-webkit-box-shadow: 0px 4px 5px 1px rgba(127,128,132,.6);
+-moz-box-shadow: 0px 4px 5px 1px rgba(127,128,132,.6);
+box-shadow: 0px 4px 5px 1px rgba(127,128,132,.6);
+transition: 0.2s;
+}
+
+.add-shadow {
+
+box-shadow:-webkit-box-shadow: 0px 4px 5px 1px rgba(127,128,132,.6)!important;
+-moz-box-shadow: 0px 4px 5px 1px rgba(127,128,132,.6)!important;
+box-shadow: 0px 4px 5px 1px rgba(127,128,132,.6)!important;
+transition: 0.2s;
+
+}
+
+.layout-content.status.status-index .unresolved-incident .updates, .layout-content.status.status-index .scheduled-incidents-container {
+
+ border:none!important;
+
+}
+
+  -->
+
+
+<script>
+
+  //Hide all of the update divs
+
+  $('div.updates.font-regular').each(function() {
+
+  $(this).hide();
+
+  });
+
+  //Get count of all unresolved incident elements
+
+  var $incidents = $('div.unresolved-incident').length;
+
+  /*
+  loop through each element to set the href value to a void, then apply IDs to associate updates with parents. After setitng IDs,
+  create click functions to show / hide, then, apply box shadow styles for 3D effect.
+  */
+
+    
+    for (let i = 0; i < $incidents; i++) {
+
+      setTimeout(function() {
+
+      var $node = $('div.unresolved-incident')[i];
+
+      var $linkNode = $node.childNodes[1].childNodes[1];
+
+      var $updateNode = $node.childNodes[3];
+
+      var $incidentId = $linkNode.href.split('/')[4]
+
+      $linkNode.href = "javascript:void(0)";
+
+      $($updateNode).attr('id', $incidentId);
+
+      $($linkNode).attr('id', $incidentId + "-link");
+
+      $("#" + $incidentId + "-link").click(function(){
+
+        if ($("#" + $incidentId).is(":hidden")) {
+
+        $("#" + $incidentId).slideDown("slow");
+
+          $($node).addClass('add-shadow');
+
+        } else {
+
+         $("#" + $incidentId).slideUp("slow");
+
+          $($node).removeClass('add-shadow');
+
+        }
+
+      });
+
+      }, 500);
+
+    }
+
+  </script>
